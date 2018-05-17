@@ -1,0 +1,19 @@
+{% block content %}
+<head>
+  <script>
+    function showImage(object) {
+
+    }
+  </script>
+</head>
+<html>
+<body>
+{% for object in list %}
+<img src="{{object.image}}" alt="Mountain View" width="500" height="377">
+
+
+{%endfor%}
+
+</body>
+</html>
+{% endblock %}

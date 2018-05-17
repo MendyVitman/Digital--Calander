@@ -1,0 +1,79 @@
+{% block content %}
+
+<html>
+<head>
+  <script>
+    function openWin(path) {
+      window.open(`${path}`,'newwindow', 'width=625,height=500' );
+    }
+  </script>
+</head>
+
+
+<br>
+<br>
+<table style="width:15%">
+  <tr>
+    <th>תמונה</th>
+    <th>מחיקה</th>
+  </tr>
+  {% for object in list %}
+  <tr>
+    {%if object.name == 'image'%}
+    <td><input type="button" onclick="openWin('./{{object.attribute_string }}')" value="צפייה" /></td>
+
+    <td>
+      {{ form.open({action: 'SettingController.store'}) }}
+      {{ csrfField }}
+      <input name="id" type="hidden" value="{{object.id}}">
+      <button type="submit">מחיקה</button>
+      {{ form.close() }}
+    </td>
+    {% endif %}
+  </tr>
+
+  {% endfor %}
+</table>
+
+<br>
+<br>
+<br>
+
+<br>
+{{ form.open({action: 'SettingController.store', files: true}) }}
+{{ csrfField }}
+<br>
+<br>
+{{ form.label('בחירת תמונת ברירת מחדל') }}
+<div class="field">
+  {{ form.file('image') }}
+</div>
+<br>
+<br>
+<br>
+{{ form.submit('אישור')}}
+
+{{ form.close() }}
+
+{{ form.open({action: 'SettingController.store'}) }}
+{{ csrfField }}
+<div class="field">
+  {{ form.label('בחר מספר שניות בין הצגת אירוע לאירוע') }}
+</div>
+<div class="field">
+  <input type="text" name="attribute_int"  value="{% for object in list %}{{object.attribute_int}}{% endfor %}">
+</div>
+<br>
+<div class="field">
+  {{ form.submit('אישור')}}
+</div>
+{{ form.close() }}
+<br>
+<br>
+<button type="button" onclick="location.href='http://localhost:3333/menu'">תפריט ראשי</button>
+<br>
+<br>
+<br>
+</body>
+</html>
+{% endblock %}

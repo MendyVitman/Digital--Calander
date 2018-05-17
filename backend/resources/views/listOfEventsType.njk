@@ -1,0 +1,56 @@
+
+
+{% block content %}
+
+<html>
+<head>
+  <script>
+    function openWin(path) {
+      window.open(`${path}`,'newwindow', 'width=625,height=500' );
+    }
+  </script>
+</head>
+<body>
+
+<table style="width:50%">
+  <tr>
+    <th>סוג אירוע</th>
+    <th>picture</th>
+    <th>edit</th>
+    <th>delete</th>
+  </tr>
+  {% for object in list %}
+
+  <tr>
+    <td>{{object.event_name}}</td>
+    <td><input type="button" onclick="openWin('/{{object.image}}')" value="צפייה" /></td>
+
+    <td>
+      {{ form.open({action: 'ViewListOfEventsTypeController.action'}) }}
+      {{ csrfField }}
+      <input name="edit" type="hidden" value="{{object.id}}">
+      <button type="submit">edit</button>
+      {{ form.close() }}
+    </td>
+    <td>
+      {{ form.open({action: 'ViewListOfEventsTypeController.action'}) }}
+      {{ csrfField }}
+      <input name="id" type="hidden" value="{{object.id}}">
+      <button type="submit">delete</button>
+      {{ form.close() }}
+    </td>
+  </tr>
+
+  {% endfor %}
+
+</table>
+
+<br>
+<br>
+<button type="button" onclick="location.href='http://localhost:3333/menu'">תפריט ראשי</button>
+<br>
+<br>
+<br>
+</body>
+</html>
+{% endblock %}

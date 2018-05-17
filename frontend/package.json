@@ -1,0 +1,13 @@
+{
+  "name": "getting-started-with-electron-1.0",
+  "version": "1.4.13",
+  "description": "",
+  "main": "demo.js",
+  "scripts": {
+    "start": "electron main.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "electron-prebuilt": "^1.4.13"
+  }
+}

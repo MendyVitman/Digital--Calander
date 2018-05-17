@@ -1,0 +1,65 @@
+{% extends 'master' %}
+
+{% block content %}
+
+<html>
+<body>
+
+{{form.open({action: 'AddEventController.store', files: true}) }}
+
+{{ csrfField }}
+<input type="hidden" name="id" value="{%if event%}{{event[0].id}}{% endif %}">
+
+<div class="form_field">
+  {{form.label('First Name')}}
+  <input type="text" name="first_name" required value="{%if event%}{{event[0].firstName}}{% endif %}">
+  <br><br>
+</div>
+<br>
+
+
+Last name<br>
+<input type="text" name="lastName" required value="{%if event%}{{event[0].lastName}}{% endif %}">
+<br><br>
+
+זיהוי נוסף<br>
+<input type="text" name="identification"  value="{%if event%}{{event[0].identification}}{% endif %}">
+<br><br>
+event<br>
+  {{ myName }}
+<select id="event" name="event">
+{% if eventList %}
+  {% for value, event in eventList %}
+  <option value="{{event}}" selected>{{ event }} </option>
+  {% endfor %}
+{% else %}
+  {% for value, event in event[1] %}
+  <option value="{{event}}">{{ event }} </option>
+  {% endfor %}
+{% endif %}
+
+</select>
+
+<br><br>
+date<br>
+<input type="date" name="date" required value="{%if event%}{{event[0].date}}{% endif %}">
+<br><br>
+
+<div class="field">
+  {{ form.file('image') }}
+</div>
+
+{{ form.submit('click')}}
+
+
+{{form.close}}
+<br>
+<br>
+<button type="button" onclick="location.href='http://localhost:3333/menu'">תפריט ראשי</button>
+<br>
+<br>
+<br>
+
+</body>
+</html>
+{% endblock %}

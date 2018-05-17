@@ -1,0 +1,45 @@
+{% extends 'master' %}
+
+{% block content %}
+
+<html>
+<body>
+
+{% if message %}
+<script>
+  alert("חובה לבחור תמונה!!!")
+</script>
+{% endif %}
+
+{{form.open({action: 'EventTypesController.store', files: true}) }}
+
+{{ csrfField }}
+<input type="hidden" name="id" value="{%if type%}{{type[0].id}}{% endif %}">
+
+<div class="form_field">
+  {{form.label('Event Name')}}
+  <input type="text" name="event_name" required value="{%if type%}{{type[0].event_name}}{% endif %}">
+</div>
+<br>
+
+<div class="field">
+  {{form.label('Default Image')}}
+  <input type="file" name="image" >
+
+</div>
+
+{{ form.submit('click')}}
+
+
+{{form.close}}
+<br>
+<br>
+<button type="button" onclick="location.href='http://localhost:3333/main'">תפריט ראשי</button>
+<br>
+<br>
+<br>
+
+
+</body>
+</html>
+{% endblock %}
